@@ -1,5 +1,6 @@
 name: Create GitHub Discussion
 
+# TODO: Replace this with the actual cron trigger
 on:
   push: # Trigger on every commit (push) to the repository
     branches:
@@ -26,9 +27,10 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          title: "📅 Commit Discussion for ${{ env.date }}"
+          title: "🏁 Checkout: ${{ env.date }}"
           body: |
-            A new commit has been pushed. Let's discuss it!
+            What did you make progress on today, @artificialio/designers?
+          # Get these next 2 values from the GitHub GraphQL API
           repository-id: "R_kgDON3gTew"
           category-id: "DIC_kwDON3gTe84Cm2Fj"
 
