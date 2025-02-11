@@ -1,15 +1,15 @@
-name: Create GitHub Discussion
+name: Create Daily Checkout Discussion
 
 # NOTE: Uncomment this temporary block (and comment the one below) if you want to test the action on every commit
-on:
-  push: # Trigger on every commit (push) to the repository
-    branches:
-      - main # Adjust to your branch name if not using "main"
-
 # on:
-#   schedule:
-#     # Run every weekday (Monday to Friday) at 12:00 UTC
-#     - cron: "0 12 * * *"
+#   push: # Trigger on every commit (push) to the repository
+#     branches:
+#       - main # Adjust to your branch name if not using "main"
+
+on:
+  schedule:
+    # Run every weekday (Monday to Friday) at 12:00 UTC
+    - cron: "0 12 * * *"
 
 jobs:
   create-discussion:
