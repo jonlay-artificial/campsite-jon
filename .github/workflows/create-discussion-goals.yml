@@ -25,7 +25,7 @@ jobs:
         id: generate-date
         run: |
           echo "year=$(date +'%Y')" >> $GITHUB_ENV
-          echo "week=$(date +'%V')" >> $GITHUB_ENV
+          echo "week=$(date +'%-V')" >> $GITHUB_ENV
 
       # Use the Create Discussion action
       - name: Create a new GitHub Discussion
