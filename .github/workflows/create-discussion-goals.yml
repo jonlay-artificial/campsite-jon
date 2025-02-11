@@ -1,51 +1,51 @@
-name: Create Daily Checkout Discussion
+# name: Create Daily Checkout Discussion
 
-# NOTE: Uncomment this temporary block (and comment the one below) if you want to test the action on every commit
-on:
-  push: # Trigger on every commit (push) to the repository
-    branches:
-      - main # Adjust to your branch name if not using "main"
-
+# # NOTE: Uncomment this temporary block (and comment the one below) if you want to test the action on every commit
 # on:
-#   schedule:
-#     # Run every Monday at 06:00 UTC
-#     - cron: "0 6 * * 1"
+#   push: # Trigger on every commit (push) to the repository
+#     branches:
+#       - main # Adjust to your branch name if not using "main"
 
-jobs:
-  create-discussion:
-    runs-on: ubuntu-latest
+# # on:
+# #   schedule:
+# #     # Run every Monday at 06:00 UTC
+# #     - cron: "0 6 * * 1"
 
-    steps:
-      # Checkout the repository
-      - name: Checkout repository
-        uses: actions/checkout@v3
+# jobs:
+#   create-discussion:
+#     runs-on: ubuntu-latest
 
-      # Generate dynamic year and week number
-      - name: Generate year and week number
-        id: generate-date
-        run: |
-          echo "year=$(date +'%Y')" >> $GITHUB_ENV
-          echo "week=$(date +'%-V')" >> $GITHUB_ENV
+#     steps:
+#       # Checkout the repository
+#       - name: Checkout repository
+#         uses: actions/checkout@v3
 
-      # Use the Create Discussion action
-      - name: Create a new GitHub Discussion
-        id: create-discussion
-        uses: abirismyname/create-discussion@v1.x
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          title: "🎯 Goals: ${{ env.year }}-W${{ env.week }}"
-          body: |
-            Hey @artificialio/designers:
+#       # Generate dynamic year and week number
+#       - name: Generate year and week number
+#         id: generate-date
+#         run: |
+#           echo "year=$(date +'%Y')" >> $GITHUB_ENV
+#           echo "week=$(date +'%-V')" >> $GITHUB_ENV
 
-            1. What do you hope to accomplish this week?
-            2. Do you have any commitments or schedule changes the team should know about?
-          # Get these next 2 values from the GitHub GraphQL API
-          repository-id: "R_kgDON3gTew"
-          category-id: "DIC_kwDON3gTe84Cm2Fj"
+#       # Use the Create Discussion action
+#       - name: Create a new GitHub Discussion
+#         id: create-discussion
+#         uses: abirismyname/create-discussion@v1.x
+#         env:
+#           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#         with:
+#           title: "🎯 Goals: ${{ env.year }}-W${{ env.week }}"
+#           body: |
+#             Hey @artificialio/designers:
 
-      # Optional step to print discussion details
-      - name: Print discussion URL and ID
-        run: |
-          echo "Discussion ID: ${{ steps.create-discussion.outputs.discussion-id }}"
-          echo "Discussion URL: ${{ steps.create-discussion.outputs.discussion-url }}"
+#             1. What do you hope to accomplish this week?
+#             2. Do you have any commitments or schedule changes the team should know about?
+#           # Get these next 2 values from the GitHub GraphQL API
+#           repository-id: "R_kgDON3gTew"
+#           category-id: "DIC_kwDON3gTe84Cm2Fj"
+
+#       # Optional step to print discussion details
+#       - name: Print discussion URL and ID
+#         run: |
+#           echo "Discussion ID: ${{ steps.create-discussion.outputs.discussion-id }}"
+#           echo "Discussion URL: ${{ steps.create-discussion.outputs.discussion-url }}"
