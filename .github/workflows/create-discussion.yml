@@ -14,6 +14,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
+      # Generate dynamic date for the discussion title
+      - name: Generate dynamic date
+        id: generate-date
+        run: echo "date=$(date +'%A, %B %d, %Y')" >> $GITHUB_ENV
+
       # Use the Create Discussion action
       - name: Create a new GitHub Discussion
         id: create-discussion
@@ -21,7 +26,7 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          title: "📅 Commit Discussion for $(date +'%A, %B %d, %Y')"
+          title: "📅 Commit Discussion for ${{ env.date }}"
           body: |
             A new commit has been pushed. Let's discuss it!
           repository-id: "R_kgDON3gTew"
